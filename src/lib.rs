@@ -11,7 +11,7 @@
 //! | Merge | independent of data distribution | `nlogn` | `nlogn` or `n` | `n` |
 //! | Quick | bad for sorted or reversed input | `n`<sup>`2`</sup> | `n` | `n` or `logn` |
 //! | Selection | the least number of swaps among all the algorithms | `n`<sup>`2`</sup>; `n` | `n`<sup>`2`</sup>; `1` | `1` |
-//! | Shell | it is optimization of insertion sort | `n`<sup>`2`</sup> or `nlog`<sup>`2`</sup> `n` | `nlogn` or `nlog`<sup>`2`</sup>`n` | `n` |
+//! | Shell | it is optimization of insertion sort | `n`<sup>`2`</sup> or `nlog`<sup>`2`</sup>`n` | `nlogn` or `nlog`<sup>`2`</sup>`n` | `n` |
 
 pub mod bubble_sort;
 pub mod cocktail_sort;
