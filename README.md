@@ -1,5 +1,24 @@
 # sorting_rs
-## This library contains following sorting algorithms implemented in Rust:
+Sorting algorithms implemented in Rust
+## Usage
+1. Add this dependency with it's version into your Cargo.toml:
+```toml
+...
+[dependencies]
+sorting_rs = "1.1.0"
+...
+```
+2. Use available sorting algorithms in your Rust code:
+```rust
+use sorting_rs::*;
+...
+```
+3. For more information about origin of algorithms and implementation details, 
+please read modules documentation 
+
+## This library contains following sorting algorithms:
+New algorithms implementations are planned, smooth sort is not ready at the
+moment, for example
  
 | Sorting algorithm | Features and downsides | Worst-case performance O(): comparisons; swaps | Best-case performance O(): comparisons; swaps | Space complexity O() |
 | ------ | -------------------------------- | ------------------------------------ | -------- | ---------- |

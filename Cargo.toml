@@ -4,19 +4,15 @@ version = "1.1.0"
 authors = ["flakusha <zenflak@gmail.com>"]
 edition = "2018"
 repository = "https://github.com/flakusha/rust_sorting"
+description = "Collection of sorting algorithms implemented in Rust"
 
 keywords = ["sort", "sorting", "library"]
 categories = ["algorithms"]
 
 license = "MIT"
 readme = "README.md"
-
 autobenches = false
 
-include = [
-    "/src/**",
-    "/bench/**",
-]
 # See more keys and their definitions at
 # https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -24,3 +20,8 @@ include = [
 
 [dev-dependencies]
 rand = "^0.7.3"
+criterion = "^0.3"
+
+[[bench]]
+name = "sort_benchmark"
+harness = false
