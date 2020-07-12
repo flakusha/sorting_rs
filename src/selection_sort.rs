@@ -16,6 +16,8 @@
 /// ```
 
 pub fn selection_sort<T: PartialOrd>(input: &mut [T]) {
+    if input.len() < 2 {return;}
+
     for i in 0..input.len() {
         let swap_val = {
             let mut min = &input[i];
@@ -45,5 +47,17 @@ mod tests {
         let mut vector_in = vec![11, 20, 21, 40, 11, 60, 5];
         selection_sort(&mut vector_in);
         debug_assert_eq!(vector_in, vec![5, 11, 11, 20, 21, 40, 60]);
+    }
+    #[test]
+    fn test_selection_empty() {
+        let mut vector_in:Vec<i32> = vec![];
+        selection_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, &[]);
+    }
+    #[test]
+    fn test_selection_len1() {
+        let mut vector_in = vec![1];
+        selection_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, vec![1]);
     }
 }

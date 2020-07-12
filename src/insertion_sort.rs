@@ -20,6 +20,8 @@
 /// ```
 
 pub fn insertion_sort<T: PartialOrd>(input: &mut [T]) {
+    if input.len() < 2 {return;}
+    
     for i in 1..input.len() {
         let mut j = i;
         while j > 0 && input[j - 1] > input[j] {
@@ -38,5 +40,17 @@ mod tests {
         let mut vector_in = vec![10, 20, 11, 24];
         insertion_sort(&mut vector_in);
         debug_assert_eq!(vector_in, vec![10, 11, 20, 24]);
+    }
+    #[test]
+    fn test_insertion_empty() {
+        let mut vector_in:Vec<i32> = vec![];
+        insertion_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, &[]);
+    }
+    #[test]
+    fn test_insertion_len1() {
+        let mut vector_in = vec![1];
+        insertion_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, vec![1]);
     }
 }

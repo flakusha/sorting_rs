@@ -104,11 +104,34 @@ mod tests {
         oddeven_sort(&mut vector_in);
         debug_assert_eq!(vector_in, vec![10, 11, 20, 24]);
     }
-    
+    #[test]
+    fn test_oddeven_empty() {
+        let mut vector_in:Vec<i32> = vec![];
+        oddeven_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, &[]);
+    }
+    #[test]
+    fn test_oddeven_len1() {
+        let mut vector_in = vec![1];
+        oddeven_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, vec![1]);
+    }
     #[test]
     fn test_oddeven_batcher() {
         let mut vector_in = vec![10, 20, 11, 24];
         oddeven_batcher_sort(&mut vector_in);
         debug_assert_eq!(vector_in, vec![10, 11, 20, 24]);
+    }
+    #[test]
+    fn test_oddeven_batcher_empty() {
+        let mut vector_in:Vec<i32> = vec![];
+        oddeven_batcher_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, &[]);
+    }
+    #[test]
+    fn test_oddeven_batcher_len1() {
+        let mut vector_in = vec![1];
+        oddeven_batcher_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, vec![1]);
     }
 }

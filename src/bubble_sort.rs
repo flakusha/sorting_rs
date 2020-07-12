@@ -16,6 +16,8 @@
 /// ```
 
 pub fn bubble_sort<T: PartialOrd>(input: &mut [T]) {
+    if input.len() < 2 {return;}
+    
     let input_len = input.len();
 
     for i in (0..input_len).rev() {
@@ -41,5 +43,17 @@ mod tests {
         let mut vector_in = vec![30, 10, 20, 11, 24, 44, 12, 11];
         bubble_sort(&mut vector_in);
         debug_assert_eq!(vector_in, vec![10, 11, 11, 12, 20, 24, 30, 44]);
+    }
+    #[test]
+    fn test_bubble_empty() {
+        let mut vector_in:Vec<i32> = vec![];
+        bubble_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, &[]);
+    }
+    #[test]
+    fn test_buble_len() {
+        let mut vector_in = vec![1];
+        bubble_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, vec![1]);
     }
 }

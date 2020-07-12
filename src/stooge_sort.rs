@@ -47,4 +47,16 @@ mod tests {
         stooge_sort(&mut vector_in);
         debug_assert_eq!(vector_in, vec![10, 11, 20, 24]);
     }
+    #[test]
+    fn test_slow_empty() {
+        let mut vector_in:Vec<i32> = vec![];
+        stooge_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, &[]);
+    }
+    #[test]
+    fn test_slow_len1() {
+        let mut vector_in = vec![1];
+        stooge_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, vec![1]);
+    }
 }

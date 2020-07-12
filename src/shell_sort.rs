@@ -46,6 +46,8 @@ impl Iterator for GapSequence {
 }
 
 pub fn shell_sort<T: PartialOrd>(input: &mut [T]) {
+    if input.len() < 2 {return;}
+    
     let len = input.len();
     let gaps = GapSequence::new(len);
 
@@ -70,5 +72,23 @@ mod test {
     fn test_correct_gap_sequence() {
         let gaps: Vec<_> = GapSequence::new(10).collect();
         debug_assert_eq!(gaps, &[5, 2, 1]);
+    }
+    #[test]
+    fn test_shell() {
+        let mut vector_in = vec![11, 20, 21, 40, 11, 60, 5];
+        shell_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, vec![5, 11, 11, 20, 21, 40, 60]);
+    }
+    #[test]
+    fn test_shell_empty() {
+        let mut vector_in:Vec<i32> = vec![];
+        shell_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, &[]);
+    }
+    #[test]
+    fn test_shell_len1() {
+        let mut vector_in = vec![1];
+        shell_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, vec![1]);
     }
 }

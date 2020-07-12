@@ -39,6 +39,7 @@
 /// ```
 
 pub fn heap_sort<T: PartialOrd>(input: &mut [T]) {
+    if input.len() < 2 {return;}
 
     for i in (0..input.len() / 2).rev() {
         heap_max(input, i, input.len());
@@ -70,6 +71,8 @@ fn heap_max<T: PartialOrd>(input: &mut [T], i: usize, heap_len: usize) {
 }
 
 pub fn heap_bottom_up_sort<T: PartialOrd>(input: &mut [T]) {
+    if input.len() < 2 {return;}
+    
     let in_len = input.len();
     for start in (0..=(in_len - 2) / 2).rev() {
         hbu_sift(input, start, in_len - 1);
@@ -129,9 +132,33 @@ mod tests {
         debug_assert_eq!(vector_in, vec![10, 11, 20, 24]);
     }
     #[test]
+    fn test_heap_empty() {
+        let mut vector_in:Vec<i32> = vec![];
+        heap_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, &[]);
+    }
+    #[test]
+    fn test_heap_len1() {
+        let mut vector_in = vec![1];
+        heap_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, vec![1]);
+    }
+    #[test]
     fn test_heap_bottom_up() {
         let mut array = [10, 20, 11, 24, 22, 21, 19];
         heap_bottom_up_sort(&mut array);
         debug_assert_eq!(array, [10, 11, 19, 20, 21, 22, 24]);
+    }
+    #[test]
+    fn test_heap_bottom_up_empty() {
+        let mut vector_in:Vec<i32> = vec![];
+        heap_bottom_up_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, &[]);
+    }
+    #[test]
+    fn test_heap_bottom_up_len1() {
+        let mut vector_in = vec![1];
+        heap_bottom_up_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, vec![1]);
     }
 }

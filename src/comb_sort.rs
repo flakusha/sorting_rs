@@ -23,6 +23,8 @@
 /// ```
 
 pub fn comb_sort<T: PartialOrd>(input: &mut [T]) {
+    if input.len() < 2 {return;}
+
     let len = input.len();
     let inv_shrink: f32 = 1.0 / 1.3;
 
@@ -55,5 +57,17 @@ mod tests {
         let mut vector_in = vec![30, 10, 20, 11, 24, 44, 12, 11];
         comb_sort(&mut vector_in);
         debug_assert_eq!(vector_in, vec![10, 11, 11, 12, 20, 24, 30, 44]);
+    }
+    #[test]
+    fn test_comb_empty() {
+        let mut vector_in:Vec<i32> = vec![];
+        comb_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, &[]);
+    }
+    #[test]
+    fn test_comb_len1() {
+        let mut vector_in = vec![1];
+        comb_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, vec![1]);
     }
 }

@@ -19,6 +19,8 @@
 /// ```
 
 pub fn slow_sort<T: PartialOrd>(input: &mut [T]) {
+    if input.len() < 2 {return;}
+
     slow_sort_sorting(input, 0, input.len() - 1);
 }
 
@@ -41,5 +43,17 @@ mod tests {
         let mut vector_in = vec![10, 20, 11, 24];
         slow_sort(&mut vector_in);
         debug_assert_eq!(vector_in, vec![10, 11, 20, 24]);
+    }
+    #[test]
+    fn test_slow_empty() {
+        let mut vector_in:Vec<i32> = vec![];
+        slow_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, &[]);
+    }
+    #[test]
+    fn test_slow_len1() {
+        let mut vector_in = vec![1];
+        slow_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, vec![1]);
     }
 }

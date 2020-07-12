@@ -59,4 +59,16 @@ mod tests {
         cocktail_sort(&mut vector_in);
         debug_assert_eq!(vector_in, vec![10, 11, 11, 12, 20, 24, 30, 44]);
     }
+    #[test]
+    fn test_cocktail_empty() {
+        let mut vector_in:Vec<i32> = vec![];
+        cocktail_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, &[]);
+    }
+    #[test]
+    fn test_cocktail_len1() {
+        let mut vector_in = vec![1];
+        cocktail_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, vec![1]);
+    }
 }

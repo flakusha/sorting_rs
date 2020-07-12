@@ -1,7 +1,9 @@
-/// Sorts a slice using
+/// Sorts a slice out-of-place using
 /// [Merge sort](https://en.wikipedia.org/wiki/Merge_sort).
 /// All kinds of slices can be sorted as long as they implement
 /// [`PartialOrd`](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html).
+/// 
+/// 
 /// 
 /// # Examples
 /// ```rust
@@ -16,11 +18,9 @@
 /// ```
 
 pub fn merge_sort<T: PartialOrd + Copy>(input: &mut [T]) {
+    if input.len() < 2 {return;}
+    
     let len = input.len();
-    if len < 2 {
-        return;
-    }
-
     let mid = len / 2;
     merge_sort(&mut input[..mid]);
     merge_sort(&mut input[mid..]);
@@ -56,5 +56,17 @@ mod tests {
         let mut vector_in = vec![10, 20, 11, 24];
         merge_sort(&mut vector_in);
         debug_assert_eq!(vector_in, vec![10, 11, 20, 24]);
+    }
+    #[test]
+    fn test_merge_empty() {
+        let mut vector_in:Vec<i32> = vec![];
+        merge_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, &[]);
+    }
+    #[test]
+    fn test_merge_len1() {
+        let mut vector_in = vec![1];
+        merge_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, vec![1]);
     }
 }
