@@ -31,7 +31,7 @@ pub mod quick_sort;
 pub mod selection_sort;
 pub mod shell_sort;
 pub mod slow_sort;
-// pub mod smooth_sort;
+pub mod smooth_sort;
 pub mod stooge_sort;
 
 pub use self::bubble_sort::bubble_sort;
@@ -46,5 +46,5 @@ pub use self::quick_sort::quick_sort;
 pub use self::selection_sort::selection_sort;
 pub use self::shell_sort::shell_sort;
 pub use self::slow_sort::slow_sort;
-// pub use self::smooth_sort::smooth_sort;
+pub use self::smooth_sort::smooth_sort;
 pub use self::stooge_sort::stooge_sort;
