@@ -9,7 +9,7 @@
 /// largest remaining element
 /// This algorithm makes use of Leonardo numbers. It's a sequence of numbers
 /// defined by:
-/// ```no_run
+/// ```ignore
 /// L(0) = 1
 /// L(1) = 1
 /// L(n) = L(n - 1) + L(n - 2) + 1
@@ -32,7 +32,6 @@
 /// sorting_rs::smooth_sort(&mut strings);
 /// assert_eq!(strings, &["cargo", "rustc", "rustup"]);
 /// ```
-use std::fmt::Debug;
 
 const LEO_NUMS: [usize; 90] = [
     1, 1, 3, 5, 9, 15, 25, 41, 67, 109, 177, 287, 465, 753, 1219, 1973, 3193,
@@ -53,11 +52,11 @@ const LEO_NUMS: [usize; 90] = [
     3559958832009428377, 5760134388741632239,
 ];
 
-pub fn smooth_sort<T: PartialOrd + Debug>(input: &mut [T])
+pub fn smooth_sort<T: PartialOrd>(input: &mut [T])
 {
     if input.len() < 2 {return;}
     
-    // Init addtitional heap
+    // Init addtitional index heap
     let input = input;
     let in_len = input.len();
     let mut heap = Vec::<usize>::new();
@@ -67,16 +66,13 @@ pub fn smooth_sort<T: PartialOrd + Debug>(input: &mut [T])
             heap.pop();
             let len_leo = heap.len();
             heap[len_leo - 1] += 1;
+        } else if heap.len() >= 1 && heap[heap.len() - 1] == 1 {
+            heap.push(0);
         } else {
-            if heap.len() >= 1 && heap[heap.len() - 1] == 1 {
-                heap.push(0);
-            } else {
-                heap.push(1);
-            }
+            heap.push(1);
         }
         restore_heap(input, i, &heap);
     }
-    println!("DEBUG: {:?}", input);
 
     for i in (0..in_len).rev() {
         if heap[heap.len() - 1] < 2 {
@@ -92,7 +88,6 @@ pub fn smooth_sort<T: PartialOrd + Debug>(input: &mut [T])
             restore_heap(input, t[0], &heap);
         }
     }
-    println!("DEBUG: {:?}", input);
 }
 
 fn restore_heap<T: PartialOrd>(input: &mut [T], index: usize, heap: &Vec<usize>)
@@ -104,8 +99,8 @@ fn restore_heap<T: PartialOrd>(input: &mut [T], index: usize, heap: &Vec<usize>)
 
     while current > 0 {
         let j = i - LEO_NUMS[k];
-        if input[j] > input[i] && (k < 2 || input[j] > input[i - 1] &&
-        input[j] > input[i - 2]) {
+        if input[j] > input[i] &&
+        (k < 2 || input[j] > input[i - 1] && input[j] > input[i - 2]) {
             input.swap(i, j);
             i = j;
             current -= 1;
@@ -114,7 +109,8 @@ fn restore_heap<T: PartialOrd>(input: &mut [T], index: usize, heap: &Vec<usize>)
             break;
         }
     }
-    while k > 2 {
+
+    while k >= 2 {
         let t = get_child_trees(i, k);
         // tr kr tl kl
         // 0  1  2  3
@@ -151,6 +147,12 @@ mod tests {
         let mut vector_in = vec![20, 10, 11, 13];
         smooth_sort(&mut vector_in);
         debug_assert_eq!(vector_in, &[10, 11, 13, 20]);
+    }
+    #[test]
+    fn test_smooth_01() {
+        let mut vector_in = vec![20, 10, 11, 13, 24, 9, 2, 1, 8];
+        smooth_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, &[1, 2, 8, 9, 10, 11, 13, 20, 24]);
     }
     #[test]
     fn test_smooth_empty() {

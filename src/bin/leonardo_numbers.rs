@@ -4,7 +4,7 @@
 /// 32-, 64-, 128-bit and other systems
 /// This addition uses usize in case there is mainstream 64-bit system
 /// # Usage:
-/// ```no_run
+/// ```ignore
 /// cargo run leonardo_numbers
 /// ```
 use std::io;
