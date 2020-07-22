@@ -43,6 +43,7 @@ fn bench(c: &mut Criterion) {
         heap_bottom_up_sort,
         insertion_sort,
         merge_sort,
+        nheap_sort,
         oddeven_sort,
         quick_sort,
         selection_sort,

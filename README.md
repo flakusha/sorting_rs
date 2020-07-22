@@ -26,6 +26,7 @@ New algorithms implementations are planned
 | Comb | speeds up when data is nearly sorted | `n`<sup>`2`</sup> | `nlogn` | `1` |
 | Gnome | simple and slow, works with one item at a time | `n`<sup>`2`</sup> | `n` | `1` |
 | Heap | independent of data distribution | `nlogn` | `nlogn` or `n` | `n` or `1` |
+| N-Heap | independent of data distribution | `nlogn` | `nlogn` or `n` | `n` or `1` |
 | Bottom-up Heap | upgraded version of heapsort with decreased number of comparisons | `nlogn` | `nlogn` or `n` | `n` or `1` |
 | Insertion | simple, but less effective than quicksort, heapsort or merge sort | `n`<sup>`2`</sup>; `n`<sup>`2`</sup> | `n`; `1` | `n` or `1` |
 | Merge | independent of data distribution | `nlogn` | `nlogn` or `n` | `n` |
