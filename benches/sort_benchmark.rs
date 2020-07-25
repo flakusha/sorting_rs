@@ -41,6 +41,7 @@ fn bench(c: &mut Criterion) {
         gnome_sort,
         heap_sort,
         heap_bottom_up_sort,
+        weak_heap_sort,
         insertion_sort,
         merge_sort,
         nheap_sort,

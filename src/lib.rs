@@ -7,6 +7,7 @@
 //! | Comb | speeds up when data is nearly sorted | `n`<sup>`2`</sup> | `nlogn` | `1` |
 //! | Gnome | simple and slow, works with one item at a time | `n`<sup>`2`</sup> | `n` | `1` |
 //! | Heap | independent of data distribution | `nlogn` | `nlogn` or `n` | `n` or `1` |
+//! | Weak Heap | independent of data distribution, decreased amount of comparisons | `nlogn` | `nlogn` or `n` | `n` or `1` |
 //! | N-Heap | independent of data distribution | `nlogn` | `nlogn` or `n` | `n` or `1` |
 //! | Bottom-up Heap | upgraded version of heapsort with decreased number of comparisons | `nlogn` | `nlogn` or `n` | `n` or `1` |
 //! | Insertion | simple, but less effective than quicksort, heapsort or merge sort | `n`<sup>`2`</sup>; `n`<sup>`2`</sup> | `n`; `1` | `n` or `1` |
@@ -40,7 +41,7 @@ pub use self::bubble_sort::bubble_sort;
 pub use self::cocktail_sort::cocktail_sort;
 pub use self::comb_sort::comb_sort;
 pub use self::gnome_sort::gnome_sort;
-pub use self::heap_sort::{heap_sort, heap_bottom_up_sort};
+pub use self::heap_sort::{heap_sort, heap_bottom_up_sort, weak_heap_sort};
 pub use self::nheap_sort::nheap_sort;
 pub use self::insertion_sort::insertion_sort;
 pub use self::merge_sort::merge_sort;

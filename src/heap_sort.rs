@@ -1,5 +1,7 @@
 /// Sorts a slice in-place using
-/// [Heap sort](https://en.wikipedia.org/wiki/Heapsort).
+/// [Heap sort](https://en.wikipedia.org/wiki/Heapsort),
+/// [Bottom-up heap sort](https://en.wikipedia.org/wiki/Heapsort#Bottom-up_heapsort),
+/// [Weak heap sort](https://en.wikipedia.org/wiki/Weak_heap#Weak-heap_sort).
 /// All kinds of slices can be sorted as long as they implement
 /// [`PartialOrd`](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html).
 ///
@@ -14,7 +16,11 @@
 /// 
 /// Bottom-up version is modified version of this algorithm with decreased
 /// number of comparisons require function call or complex logic, then bottom-up
-/// version of algorithm is more effective
+/// version of algorithm is more effective.
+/// 
+/// Weak-heap sort main aim is to minimize amount of comparisons between
+/// elements. Amount of comparisons is basically lowered down to nearly
+/// nlogn - n / ln2 + O(logn)
 ///
 /// # Examples
 /// ```rust
@@ -35,6 +41,16 @@
 /// ```rust
 /// let mut strings = vec!["rustc", "cargo", "rustup"];
 /// sorting_rs::heap_bottom_up_sort(&mut strings);
+/// assert_eq!(strings, &["cargo", "rustc", "rustup"]);
+/// ```
+/// ```rust
+/// let mut vec = vec![5, 2, 7, 3, 9];
+/// sorting_rs::weak_heap_sort(&mut vec);
+/// debug_assert_eq!(vec, &[2, 3, 5, 7, 9]);
+/// ```
+/// ```rust
+/// let mut strings = vec!["rustc", "cargo", "rustup"];
+/// sorting_rs::weak_heap_sort(&mut strings);
 /// assert_eq!(strings, &["cargo", "rustc", "rustup"]);
 /// ```
 
@@ -121,6 +137,52 @@ fn hbu_sift<T: PartialOrd>(input: &mut [T], start: usize, end: usize) {
     }
 }
 
+pub fn weak_heap_sort<T: PartialOrd>(input: &mut [T]) {
+    let n = input.len();
+
+    if n < 2 {return;}
+    else {
+        let mut r = vec![0; (n + 7) / 8];
+        for i in (1..n).rev() {
+            let mut j = i;
+            while j & 1 == get_flag(&r, j >> 1) {j >>= 1;}
+            let gparent = j >> 1;
+            weak_heap_merge(input, &mut r, gparent, i);
+        }
+
+        for i in (2..n).rev() {
+            input.swap(0, i);
+            let mut x = 1;
+            let mut y = 2 * x + get_flag(&r, x);
+            while y < i {
+                x = y;
+                y = 2 * x + get_flag(&r, x);
+            }
+            while x > 0 {
+                weak_heap_merge(input, &mut r, 0, x);
+                x >>= 1;
+            }
+        }
+        input.swap(0, 1);
+    }
+}
+
+fn weak_heap_merge<T: PartialOrd>(input: &mut [T], r: &mut Vec<usize>,
+i: usize, j: usize) {
+    if input[i] < input[j] {
+        tog_flag(r, j);
+        input.swap(i, j);
+    }
+}
+
+fn get_flag(r: &Vec<usize>, x: usize) -> usize {
+    (r[x >> 3] >> (x & 7)) & 1
+}
+
+fn tog_flag(r: &mut Vec<usize>, x: usize) {
+    r[x >> 3] ^= 1 << (x & 7)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -159,6 +221,30 @@ mod tests {
     fn test_heap_bottom_up_len1() {
         let mut vector_in = vec![1];
         heap_bottom_up_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, vec![1]);
+    }
+    #[test]
+    fn test_weak_heap_small() {
+        let mut vector_in = vec![10, 20, 11, 24, 13];
+        weak_heap_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, vec![10, 11, 13, 20, 24]);
+    }
+    #[test]
+    fn test_weak_heap_big() {
+        let mut array = [10, 20, 11, 24, 22, 21, 19, 9, 7, 8, 6, 5];
+        weak_heap_sort(&mut array);
+        debug_assert_eq!(array, [5, 6, 7, 8, 9, 10, 11, 19, 20, 21, 22, 24]);
+    }
+    #[test]
+    fn test_weak_heap_empty() {
+        let mut vector_in:Vec<i32> = vec![];
+        weak_heap_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, &[]);
+    }
+    #[test]
+    fn test_weak_heap_len1() {
+        let mut vector_in = vec![1];
+        weak_heap_sort(&mut vector_in);
         debug_assert_eq!(vector_in, vec![1]);
     }
 }
