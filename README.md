@@ -20,7 +20,7 @@ please read modules documentation
 New algorithms implementations are planned
  
 | Sorting algorithm | Features and downsides | Worst-case performance O(): comparisons; swaps | Best-case performance O(): comparisons; swaps | Space complexity O() |
-| ------ | -------------------------------- | ------------------------------------ | -------- | ---------- |
+| -------------- | -------------------------------- | -------- | -------- | ------------- |
 | Bubble | bad for sorted or reversed input | `n`<sup>`2`</sup>; `n`<sup>`2`</sup> | `n`; `1` | `n` or `1` |
 | Cocktail | little performance improvement over bubble sort | `n`<sup>`2`</sup> | `n` | `1` |
 | Comb | speeds up when data is nearly sorted | `n`<sup>`2`</sup> | `nlogn` | `1` |
@@ -33,7 +33,8 @@ New algorithms implementations are planned
 | Merge | independent of data distribution | `nlogn` | `nlogn` or `n` | `n` |
 | Odd-even | presented to be effective on processors with local interconnections | `n`<sup>`2`</sup> | `n` | `1` |
 | Odd-even (Batcher) | more efficient version of odd-even sort | `log`<sup>`2`</sup>`n` | `log`<sup>`2`</sup>`n` | `log`<sup>`2`</sup>`n` |
-| Quick | bad for sorted or reversed input | `n`<sup>`2`</sup> | `n` | `n` or `logn` |
+| Quick | bad for sorted or reversed input | `n`<sup>`2`</sup> | `nlog`<sub>2</sub>`n` | `n` or `logn` |
+| Ksort | modified version of quicksort, faster than heap at less than 7 million elements | `n`<sup>`2`</sup> | `nlog`<sub>2</sub>`n` | `n` or `logn` |
 | Selection | the least number of swaps among all the algorithms | `n`<sup>`2`</sup>; `n` | `n`<sup>`2`</sup>; `1` | `1` |
 | Shell | it is optimization of insertion sort | `n`<sup>`2`</sup> or `nlog`<sup>`2`</sup>`n` | `nlogn` or `nlog`<sup>`2`</sup>`n` | `n` |
 | Slow | it's slow, who would ever need it? | | | |

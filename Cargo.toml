@@ -1,6 +1,6 @@
 [package]
 name = "sorting_rs"
-version = "1.2.2"
+version = "1.2.3"
 authors = ["flakusha <zenflak@gmail.com>"]
 edition = "2018"
 repository = "https://github.com/flakusha/rust_sorting"

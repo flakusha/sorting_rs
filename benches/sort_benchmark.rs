@@ -30,7 +30,7 @@ macro_rules! create_bench {
 }
 
 fn bench(c: &mut Criterion) {
-    let sizes: Vec<usize> = vec![10, 100, 1000, 10_000, /*100_000, 1_000_000,
+    let sizes: Vec<usize> = vec![10, 100, 1000, 10_000, 100_000, /* 1_000_000,
     10_000_000*/];
 
     let benchmark = create_bench! {
@@ -43,6 +43,7 @@ fn bench(c: &mut Criterion) {
         heap_bottom_up_sort,
         weak_heap_sort,
         insertion_sort,
+        ksort,
         merge_sort,
         nheap_sort,
         oddeven_sort,

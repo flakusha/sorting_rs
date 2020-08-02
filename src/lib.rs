@@ -14,7 +14,8 @@
 //! | Merge | independent of data distribution | `nlogn` | `nlogn` or `n` | `n` |
 //! | Odd-even | presented to be effective on processors with local interconnections | `n`<sup>`2`</sup> | `n` | `1` |
 //! | Odd-even (Batcher) | more efficient version of odd-even sort | `log`<sup>`2`</sup>`n` | `log`<sup>`2`</sup>`n` | `log`<sup>`2`</sup>`n` |
-//! | Quick | bad for sorted or reversed input | `n`<sup>`2`</sup> | `n` | `n` or `logn` |
+//! | Quick | bad for sorted or reversed input | `n`<sup>`2`</sup> | `nlog`<sub>2</sub>`n` | `n` or `logn` |
+//! | Ksort | modified version of quicksort, faster than heap at less than 7 million elements | `n`<sup>`2`</sup> | `nlog`<sub>2</sub>`n` | `n` or `logn` |
 //! | Selection | the least number of swaps among all the algorithms | `n`<sup>`2`</sup>; `n` | `n`<sup>`2`</sup>; `1` | `1` |
 //! | Shell | it is optimization of insertion sort | `n`<sup>`2`</sup> or `nlog`<sup>`2`</sup>`n` | `nlogn` or `nlog`<sup>`2`</sup>`n` | `n` |
 //! | Slow | it's slow, who would ever need it? | | | |
@@ -27,6 +28,7 @@ pub mod comb_sort;
 pub mod gnome_sort;
 pub mod heap_sort;
 pub mod insertion_sort;
+pub mod ksort;
 pub mod merge_sort;
 pub mod nheap_sort;
 pub mod oddeven_sort;
@@ -44,6 +46,7 @@ pub use self::gnome_sort::gnome_sort;
 pub use self::heap_sort::{heap_sort, heap_bottom_up_sort, weak_heap_sort};
 pub use self::nheap_sort::nheap_sort;
 pub use self::insertion_sort::insertion_sort;
+pub use self::ksort::ksort;
 pub use self::merge_sort::merge_sort;
 pub use self::oddeven_sort::{oddeven_sort, oddeven_batcher_sort};
 pub use self::quick_sort::quick_sort;
