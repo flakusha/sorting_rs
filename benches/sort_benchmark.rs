@@ -48,6 +48,7 @@ fn bench(c: &mut Criterion) {
         nheap_sort,
         oddeven_sort,
         quick_sort,
+        quick_dual_sort,
         selection_sort,
         shell_sort,
         smooth_sort

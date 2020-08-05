@@ -1,12 +1,12 @@
-/// Additional private binary to print Leonardo and Fibonnaci numbers
-/// Leonardo numbers are then used in smoothsort algorithm
-/// This one can be useful in case you need to modify algorithm to use with
-/// 32-, 64-, 128-bit and other systems
-/// This addition uses usize in case there is mainstream 64-bit system
-/// # Usage:
-/// ```ignore
-/// cargo run leonardo_numbers
-/// ```
+//! Additional private binary to print Leonardo and Fibonnaci numbers.
+//! Leonardo numbers are used in smoothsort algorithm as constant.
+//! This one can be useful in case you need to modify algorithm to use with
+//! 32-, 64-, 128-bit and other systems.
+//! This addition uses usize in case there is mainstream 64-bit system
+//! # Usage:
+//! ```ignore
+//! cargo run leonardo_numbers
+//! ```
 use std::io;
 
 fn leonardo_generate(mut n0: usize, mut n1: usize, add: usize) ->
