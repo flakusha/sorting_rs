@@ -31,11 +31,12 @@ point too
 | Insertion | simple, but less effective than quicksort, heapsort or merge sort | `n`<sup>`2`</sup>; `n`<sup>`2`</sup> | `n`; `1` | `n` or `1` |
 | Merge | independent of data distribution | `nlogn` | `nlogn` | `n` |
 | Odd-even | presented to be effective on processors with local interconnections | `n`<sup>`2`</sup> | `n` | `1` |
-| Odd-even (Batcher) | more efficient version of odd-even sort | `log`<sup>`2`</sup>`n` | `log`<sup>`2`</sup>`n` | `log`<sup>`2`</sup>`n` |
+| Odd-even (Batcher) | more efficient version of odd-even sort | `nlogn`<sup>`2`</sup> | `logn`<sup>`2`</sup> | `logn`<sup>`2`</sup> |
 | Quick | bad for sorted or reversed input | `n`<sup>`2`</sup> | `nlog`<sub>2</sub>`n` | `n` or `logn` |
 | Quick dual | enchanced version of quicksort | `n`<sup>`2`</sup> | `2nlnn` | `n` or `logn` |
 | Ksort | modified version of quicksort, faster than heap at less than 7 million elements | `n`<sup>`2`</sup> | `nlog`<sub>2</sub>`n` | `n` or `logn` |
 | Selection | the least number of swaps among all the algorithms | `n`<sup>`2`</sup>; `n` | `n`<sup>`2`</sup>; `1` | `1` |
+| Double selection | modified version of selection sort with more workload, but better efficiency | `n`<sup>`2`</sup>; `n` | `n`<sup>`2`</sup>; `1` | more than Selection |
 | Shellsort | it is optimization of insertion sort | `n`<sup>`3/2`</sup> or `nlog`<sup>`2`</sup>`n` | `nlogn` | `1` |
 | Slow | it's slow, who would ever need it? | | | |
 | Smooth | variant of heapsort, good for nearly sorted data | `nlogn` | `n` | `n` or `1` |

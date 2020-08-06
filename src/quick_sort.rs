@@ -8,7 +8,8 @@
 /// Quicksort can be compared to merge sort as it also is a divide-and-conquer
 /// algorithm. However, quicksort does all the heavy work before the recursive
 /// calls, so it could also be called a conquer-and-divide algorithm. This
-/// implementation uses the [Lomuto partition scheme](https://en.wikipedia.org/wiki/Quicksort#Lomuto_partition_scheme).
+/// implementation uses the
+/// [Lomuto partition scheme](https://en.wikipedia.org/wiki/Quicksort#Lomuto_partition_scheme).
 ///
 /// # Examples
 /// ```rust
@@ -70,7 +71,6 @@ end: usize) {
     if input[start] > input[end] {
         input.swap(start, end);
     }
-    // let seventh = (input.len()) >> 3 + (input.len() >> 6) + 1;
     let lpivot = input[start];
     let rpivot = input[end];
 

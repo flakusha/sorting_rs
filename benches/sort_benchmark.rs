@@ -50,6 +50,7 @@ fn bench(c: &mut Criterion) {
         quick_sort,
         quick_dual_sort,
         selection_sort,
+        selection_double_sort,
         shell_sort,
         smooth_sort
         // Exclude extremely slow sorts
