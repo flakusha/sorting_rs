@@ -9,7 +9,7 @@
 /// largest remaining element
 /// This algorithm makes use of Leonardo numbers. It's a sequence of numbers
 /// defined by:
-/// ```ignore
+/// ```text
 /// L(0) = 1
 /// L(1) = 1
 /// L(n) = L(n - 1) + L(n - 2) + 1
