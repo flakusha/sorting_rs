@@ -44,7 +44,7 @@ pub mod stooge_sort;
 pub use self::bubble_sort::bubble_sort;
 pub use self::cocktail_sort::cocktail_sort;
 pub use self::comb_sort::comb_sort;
-pub use self::gnome_sort::gnome_sort;
+pub use self::gnome_sort::{gnome_sort, gnome_up_sort};
 pub use self::heap_sort::{heap_sort, heap_bottom_up_sort, weak_heap_sort};
 pub use self::nheap_sort::nheap_sort;
 pub use self::insertion_sort::insertion_sort;

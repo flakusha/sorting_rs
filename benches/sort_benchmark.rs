@@ -39,6 +39,7 @@ fn bench(c: &mut Criterion) {
         cocktail_sort,
         comb_sort,
         gnome_sort,
+        gnome_up_sort,
         heap_sort,
         heap_bottom_up_sort,
         weak_heap_sort,

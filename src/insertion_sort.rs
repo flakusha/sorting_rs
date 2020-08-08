@@ -6,7 +6,7 @@
 /// This sorting algorithm is very efficient when used on small data sets.
 /// This is because insertion sort has constant space complexity and works
 /// very fast when used on partially sorted data.
-///
+/// 
 /// # Examples
 /// ```rust
 /// let mut vec = vec![-4, -5, 7, 45, 0];
@@ -15,7 +15,7 @@
 /// ```
 /// ```rust
 /// let mut strings = vec!["rustc", "cargo", "rustup"];
-/// sorting_rs::shell_sort(&mut strings);
+/// sorting_rs::insertion_sort(&mut strings);
 /// assert_eq!(strings, &["cargo", "rustc", "rustup"]);
 /// ```
 
@@ -53,4 +53,22 @@ mod tests {
         insertion_sort(&mut vector_in);
         debug_assert_eq!(vector_in, vec![1]);
     }
+    // #[test]
+    // fn test_insertion_bin() {
+    //     let mut vector_in = vec![10, 20, 11, 24];
+    //     insertion_bin_sort(&mut vector_in);
+    //     debug_assert_eq!(vector_in, vec![10, 11, 20, 24]);
+    // }
+    // #[test]
+    // fn test_insertion_bin_empty() {
+    //     let mut vector_in:Vec<i32> = vec![];
+    //     insertion_bin_sort(&mut vector_in);
+    //     debug_assert_eq!(vector_in, &[]);
+    // }
+    // #[test]
+    // fn test_insertion_bin_len1() {
+    //     let mut vector_in = vec![1];
+    //     insertion_bin_sort(&mut vector_in);
+    //     debug_assert_eq!(vector_in, vec![1]);
+    // }
 }
