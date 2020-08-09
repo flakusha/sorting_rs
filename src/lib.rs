@@ -27,6 +27,7 @@
 pub mod bubble_sort;
 pub mod cocktail_sort;
 pub mod comb_sort;
+pub mod cycle_sort;
 pub mod gnome_sort;
 pub mod heap_sort;
 pub mod insertion_sort;
@@ -44,6 +45,7 @@ pub mod stooge_sort;
 pub use self::bubble_sort::bubble_sort;
 pub use self::cocktail_sort::cocktail_sort;
 pub use self::comb_sort::comb_sort;
+pub use self::cycle_sort::cycle_sort;
 pub use self::gnome_sort::{gnome_sort, gnome_up_sort};
 pub use self::heap_sort::{heap_sort, heap_bottom_up_sort, weak_heap_sort};
 pub use self::nheap_sort::nheap_sort;

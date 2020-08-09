@@ -1,7 +1,7 @@
 /// Sorts a slice in-place using
 /// [Selection sort](https://en.wikipedia.org/wiki/Selection_sort).
-/// [Double selection sort](http://warp.povusers.org/DoubleBurstSelectionSort/)
-/// /// All kinds of slices can be sorted as long as they implement
+/// [Double selection sort](http://warp.povusers.org/DoubleBurstSelectionSort/).
+/// All kinds of slices can be sorted as long as they implement
 /// [`PartialOrd`](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html).
 ///
 /// # Examples
