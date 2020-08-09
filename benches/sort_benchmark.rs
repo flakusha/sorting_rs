@@ -35,9 +35,11 @@ fn bench(c: &mut Criterion) {
 
     let benchmark = create_bench! {
         sizes,
+        bingo_sort,
         bubble_sort,
         cocktail_sort,
         comb_sort,
+        cycle_sort,
         gnome_sort,
         gnome_up_sort,
         heap_sort,
@@ -48,6 +50,7 @@ fn bench(c: &mut Criterion) {
         merge_sort,
         nheap_sort,
         oddeven_sort,
+        pancake_sort,
         quick_sort,
         quick_dual_sort,
         selection_sort,

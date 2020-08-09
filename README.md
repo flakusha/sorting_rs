@@ -1,5 +1,5 @@
 # sorting_rs
-Sorting algorithms implemented in Rust
+Sorting algorithms implemented in Rust.
 ## Usage
 1. Add this dependency and please consider it's version into your Cargo.toml:
 ```toml
@@ -10,29 +10,35 @@ sorting_rs = "1.2.0"
 ```rust
 use sorting_rs::*;
 ```
-3. For more information about origin of algorithms and implementation details, 
+3. API for every sorting function is pretty the same: you just have to pass
+mutable reference: `&mut [T]`, or `vec![T, T, T, ...]`. `T` should have
+`PartialOrd` trait, sometimes you may need `Copy` or `Clone` traits, though
+all implementations try to avoid this kind of additional requirements.
+4. For more information about origin of algorithms and implementation details, 
 please read modules documentation.
-[wikipedia](https://en.wikipedia.org/wiki/Sorting_algorithm) is nice starting
-point too
-4. For API 
+[Wikipedia](https://en.wikipedia.org/wiki/Sorting_algorithm) is nice starting
+point too.
 
 ## This library contains following sorting algorithms:
  
 | Sorting algorithm | Features and downsides                                               | Worst-case performance O(): comparisons; swaps | Best-case performance O(): comparisons; swaps | Space complexity O() |
 | ----------------- | -------------------------------------------------------------------- | ---------------------------------------------- | --------------------------------------------- | -------------------- |
+| Bingo             | aims to be faster than selection sort if there are duplicates        | `n + m`<sup>2</sup>                            | `nm`                                          |                      |
 | Bubble            | bad for sorted or reversed input                                     | `n`<sup>`2`</sup>; `n`<sup>`2`</sup>           | `n`; `1`                                      | `1`                  |
 | Cocktail          | little performance improvement over bubble sort                      | `n`<sup>`2`</sup>                              | `n`                                           | `1`                  |
 | Comb              | speeds up when data is nearly sorted                                 | `n`<sup>`2`</sup>                              | `nlogn`                                       | `1`                  |
+| Cycle             | uses minimum amount of writes, good for memory with limited TBW      | `n`<sup>`2`</sup>                              | `n`<sup>`2`</sup>                             | `1`                  |
 | Gnome             | simple and slow, works with one item at a time                       | `n`<sup>`2`</sup>                              | `n`                                           | `1`                  |
 | Heap              | independent of data distribution                                     | `nlogn`                                        | `nlogn`                                       | `1`                  |
 | Weak Heap         | independent of data distribution, decreased number of comparisons    | `nlogn`                                        | `nlogn`                                       | `1`                  |
-| N-Heap            | should be faster than default heap. n = 3                            | `nlogn`                                        | `nlogn`                                       | `1`                  |
+| N-Heap            | should be faster than default heap. N = 3                            | `nlogn`                                        | `nlogn`                                       | `1`                  |
 | Bottom-up Heap    | upgraded version of heapsort with decreased number of comparisons    | `nlogn`                                        | `nlogn`                                       | `1`                  |
 | Insertion         | simple, but less effective than quicksort, heapsort or merge sort    | `n`<sup>`2`</sup>; `n`<sup>`2`</sup>           | `n`; `1`                                      | `1`                  |
 | Merge             | independent of data distribution                                     | `nlogn`                                        | `nlogn`                                       | `n`                  |
 | Odd-even          | presented to be effective on processors with local interconnections  | `n`<sup>`2`</sup>                              | `n`                                           | `1`                  |
-| Odd-even Batcher  | more efficient version of odd-even sort                              | `nlogn`<sup>`2`</sup>                          | `logn`<sup>`2`</sup>                          | `logn`<sup>`2`</sup> |
-| Quick             | bad for sorted or reversed input                                     | `n`<sup>`2`</sup>                              | `nlog`<sub>2</sub>`n`                         | `logn`               |
+| Odd-even Batcher  | more efficient version of odd-even sort                              | `log`<sup>`2`</sup>`n`                         | `log`<sup>`2`</sup>`n`                        | `logn`<sup>`2`</sup> |
+| Pancake           | swaps data a lot and not so effective in practice                    | `n`<sup>`3`</sup>; `2n - 3`                    | `n`<sup>`2`</sup>                             | `n`                  |
+| Quick             | bad for sorted or reversed input                                     | `n`<sup>`2`</sup>                              | `nlogn`                                       | `logn`               |
 | Quick dual        | enchanced version of quicksort                                       | `n`<sup>`2`</sup>                              | `2nlnn`                                       | `logn`               |
 | Ksort             | quicksort variant, faster than heap at less than 7 million elements  | `n`<sup>`2`</sup>                              | `nlog`<sub>2</sub>`n`                         | `logn`               |
 | Selection         | the least number of swaps among all the algorithms                   | `n`<sup>`2`</sup>; `n`                         | `n`<sup>`2`</sup>; `1`                        | `1`                  |

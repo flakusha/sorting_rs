@@ -4,7 +4,7 @@
 /// [`PartialOrd`](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html).
 /// 
 /// This kind of sort is pretty good in case you need as low writes as
-/// possible, for example, using SSD or NAND memory
+/// possible, for example, using SSD or NAND memory.
 /// 
 /// # Examples
 /// ```rust
@@ -17,45 +17,41 @@
 /// sorting_rs::cycle_sort(&mut strings);
 /// assert_eq!(strings, &["cargo", "rustc", "rustup"]);
 /// ```
-use std::fmt::Debug;
 
-pub fn cycle_sort<T: PartialOrd + Copy + Debug>(input: &mut [T]) {
-    let in_len = input.len();
-    if in_len < 2 {return;}
+pub fn cycle_sort<T: PartialOrd + Copy>(input: &mut [T]) {
+    if input.len() < 2 {return;}
     
-    for item in 0..in_len {
-        let key = input[item];
-        let mut pos = item;
+    let in_len = input.len();
+    for index in 0..in_len {
+        let mut key = input[index];
+        let mut pos = index;
 
-        for i in item + 1..in_len {
-            if input[i] < key {
-                pos += 1;
-            }
+        for i in index + 1..in_len {
+            if input[i] < key {pos += 1;}
         }
-        
-        if pos == item {continue;}
+
+        if pos == index {continue;}
 
         while key == input[pos] {
             pos += 1;
         }
-        input.swap(pos, item);
-        println!("DBG: 0 {:?}", input);
+        // One does not simply swap by indexes, but copies item into buffer
+        let tmp = input[pos];
+        input[pos] = key;
+        key = tmp;
 
-        while pos != item {
-            pos = item;
-            for i in item + 1..in_len {
-                if input[i] < key {
-                    pos += 1;
-                }
+        while pos != index {
+            pos = index;
+            for i in index + 1..in_len {
+                if input[i] < key {pos += 1;}
             }
-            println!("DBG: 1 {:?}", input);
             while key == input[pos] {
                 pos += 1;
             }
-            input.swap(pos, item);
-            println!("DBG: 2 {:?}", input);
+            let tmp = input[pos];
+            input[pos] = key;
+            key = tmp;
         }
-        println!("DBG: 3 {:?}", input);
     }
 }
 
