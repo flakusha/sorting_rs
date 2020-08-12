@@ -9,36 +9,20 @@
 //! ```
 use std::io;
 
-fn leonardo_generate(mut n0: usize, mut n1: usize, add: usize) ->
-impl std::iter::Iterator<Item = usize> {
-    std::iter::from_fn(move || {
-        let n = n0;
-        n0 = n1;
-        n1 += n + add;
-        Some(n)
-    })
-}
-
 fn main() {
     let mut input = String::new();
     io::stdin().read_line(&mut input).expect("Failed to read value");
     input = input.to_string().trim().to_string();
     match input.parse::<usize>() {
-        Ok(input) => {calculate_leonardo(input)},
+        Ok(input) => {calculate_powers_of_two(input)},
         _ => {println!("Input is not a number!"); main();}
     }
 }
 
-fn calculate_leonardo(num: usize) {
-    for i in leonardo_generate(1, 1, 1).take(num) {
-        print!("{}, ", i);
+fn calculate_powers_of_two(input: usize) {
+    let mut powers = Vec::<usize>::with_capacity(input);
+    for i in 1..input + 1 {
+        powers.push(2usize.pow(i as u32));
     }
-    println!();
-    println!("Maximum number: {}", usize::MAX);
+    println!("{:?}", powers);
 }
-
-/*
-fn calculate_fibonacci(num: usize) {
-    for i in leonardo_generic(0, 1, 0).take(num)
-}
-*/

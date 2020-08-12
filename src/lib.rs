@@ -28,6 +28,7 @@
 //! | Stooge            | it's a bit faster than slow sort                                     | `n`<sup>`2.7095`</sup>                         |                                               | `n`                  |
 
 pub mod bingo_sort;
+// pub mod bitonic_sort;
 pub mod bubble_sort;
 pub mod cocktail_sort;
 pub mod comb_sort;
@@ -48,6 +49,7 @@ pub mod smooth_sort;
 pub mod stooge_sort;
 
 pub use self::bingo_sort::bingo_sort;
+// pub use self::bitonic_sort::bitonic_sort;
 pub use self::bubble_sort::bubble_sort;
 pub use self::cocktail_sort::cocktail_sort;
 pub use self::comb_sort::comb_sort;

@@ -19,7 +19,7 @@
 /// assert_eq!(strings, &["cargo", "rustc", "rustup"]);
 /// ```
 
-pub fn pancake_sort<T: PartialOrd + Copy>(input: &mut Vec<T>) {
+pub fn pancake_sort<T: PartialOrd + Copy>(input: &mut [T]) {
     if input.len() < 2 {return;}
 
     let in_len = input.len() - 1;
@@ -45,10 +45,8 @@ fn largest_pancake<T: PartialOrd + Copy>(input: &[T], index: usize)
     largest
 }
 
-fn flip<T: PartialOrd + Copy>(input: &mut Vec<T>, index: usize) {
-    let mut pile:Vec<T> = input.drain(0..=index).rev().collect();
-    pile.append(input);
-    std::mem::swap(input, &mut pile);
+fn flip<T: PartialOrd + Copy>(input: &mut [T], index: usize) {
+    input[..=index].reverse();
 }
 
 
