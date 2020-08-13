@@ -6,7 +6,7 @@
 ///
 /// This sorting algorithm transforms the input array into implicit heap data
 /// structure and then produces the sorted array by repeatedly extracting the
-/// largest remaining element
+/// largest remaining element.
 /// This algorithm makes use of Leonardo numbers. It's a sequence of numbers
 /// defined by:
 /// ```text
@@ -16,10 +16,10 @@
 /// *OR*
 /// L(n) = 2 * Fib(n + 1) - 1
 /// ```
-/// Where *+ 1* is "add" number and "Fib" are Fibonacci numbers
+/// Where *+ 1* is "add" number and "Fib" are Fibonacci numbers.
 /// 
 /// For 64-bit systems it's possible to use 90 Leonardo numbers placed as a
-/// constant array [usize; 90]
+/// constant array [usize; 90].
 ///
 /// # Examples
 /// ```rust

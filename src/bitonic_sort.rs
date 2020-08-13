@@ -5,6 +5,21 @@
 ///
 /// Bitonic sort is one of the fastest sorting networks. Sorting network has the
 /// sequence of comparisons that are not data-dependent.
+/// 
+/// Default implementations of this algorithm demand power of two elements in
+/// array, but for API consistency any length is supported in case of this
+/// implementation. This flexibility comes at cost though: the least effective
+/// operation is `Vec::drain(..index)`, which removes additional values from the
+/// beginning of Vec. Also algotithm has to place new <T> instances to make
+/// array compatible with logic.
+/// 
+/// In the current implementation maximum supported array length is
+/// `9223372036854775808`. Next power of two which is `usize::MAX` is actually
+/// 2<sup>64</sup>-1, but isn't supported in most of known cases anyway, as it
+/// occupies 147.6 exabytes of memory.
+/// 
+/// Performance-wise all the available 64 bit powers of two are calculated and
+/// placed into const.
 ///
 /// # Examples
 /// ```rust
@@ -17,19 +32,18 @@
 /// sorting_rs::bitonic_sort(&mut strings);
 /// assert_eq!(strings, &["cargo", "rustc", "rustup"]);
 /// ```
-// use std::fmt::Debug;
 
-pub fn bitonic_sort<T: PartialOrd + Max<T>>(input: &mut [T]) {
+pub fn bitonic_sort<T: PartialOrd + Default + Clone>(input: &mut Vec<T>) {
     if input.len() < 2 {return;}
+    else if input.len() > 9223372036854775808 {panic!("Array is too big")}
     
     let in_len = input.len();
-    // Convert to vec of options
-    // let mut input_m: Vec<Option<&T>> = input.into_iter().map(Some).collect();
+
     // Check if input array has length of power of 2 and add None to fill it up
     let mut add_len = 0;
     println!("{}", add_len);
 
-    for (i, num) in POWERS_OF_TWO.into_iter().enumerate() {
+    for (i, num) in POWERS_OF_TWO.iter().enumerate() {
         if in_len == *num {add_len = 0;}
         if i > 0 {
             if in_len < *num {if in_len > POWERS_OF_TWO[i - 1] {
@@ -38,49 +52,40 @@ pub fn bitonic_sort<T: PartialOrd + Max<T>>(input: &mut [T]) {
         }
     }
 
-    if add_len > 0 {input.append(vec![T::MAX; add_len]);}
+    if add_len > 0 {
+        input.append(&mut vec![T::default(); add_len]);
+    }
     
-    sort(&mut input, true);
-
+    bit_sort(input, true);
+    input.drain(..add_len);
 }
 
 
-// pub fn sort<T: PartialOrd>(input: &mut [T], mode: bool) {
-//     if input.len() > 1 {
-//         let mid_point = input.len() / 2;
-//         sort(&mut input[..mid_point], true);
-//         sort(&mut input[mid_point..], false);
-//         sub_sort(input, mode);
-//     }
-// }
-// fn sub_sort<T: PartialOrd>(input: &mut [T], mode: bool) {
-//     if input.len() > 1 {
-//         compare_and_swap(input, mode);
-//         let mid_point = input.len() / 2;
-//         sub_sort(&mut input[..mid_point], mode);
-//         sub_sort(&mut input[mid_point..], mode);
-//     }
-// }
-// fn compare_and_swap<T: PartialOrd>(input: &mut [T], mode: bool) {
-//     let mid_point = input.len() / 2;
-//     for i in 0..mid_point {
-//         if input[i].is_none() || input[i + 1].is_none() {break;}
-//         else if (input[i] > input[mid_point + i]) == mode {
-//             input.swap(i, mid_point + i);
-//         }
-//     }
-// }
+fn bit_sort<T: PartialOrd>(input: &mut [T], mode: bool) {
+    if input.len() > 1 {
+        let mid_point = input.len() / 2;
+        bit_sort(&mut input[..mid_point], true);
+        bit_sort(&mut input[mid_point..], false);
+        sub_sort(input, mode);
+    }
+}
+fn sub_sort<T: PartialOrd>(input: &mut [T], mode: bool) {
+    if input.len() > 1 {
+        compare_and_swap(input, mode);
+        let mid_point = input.len() / 2;
+        sub_sort(&mut input[..mid_point], mode);
+        sub_sort(&mut input[mid_point..], mode);
+    }
+}
+fn compare_and_swap<T: PartialOrd>(input: &mut [T], mode: bool) {
+    let mid_point = input.len() / 2;
+    for i in 0..mid_point {
+        if (input[i] > input[mid_point + i]) == mode {
+            input.swap(i, mid_point + i);
+        }
+    }
+}
 
-// fn bit_comp<T: PartialOrd>(input: &mut Vec<T>, mode: bool) {
-//     let d = input.len() / 2;
-//     for i in 0..d {
-//         if (input[i] > input[i + d]) == mode {
-//             input.swap(i, i + d);
-//         }
-//     }
-// }
-
-/// usize for 64 bit is limited with 63 numbers
 const POWERS_OF_TWO: [usize; 63] = [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024,
 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576,
 2097152, 4194304, 8388608, 16777216, 33554432, 67108864, 134217728, 268435456,
@@ -93,55 +98,33 @@ const POWERS_OF_TWO: [usize; 63] = [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024,
 144115188075855872, 288230376151711744, 576460752303423488, 1152921504606846976,
 2305843009213693952, 4611686018427387904, 9223372036854775808];
 
-/// Implemented Max values for generics to use in the code
-macro_rules! impl_max {
-    ($($t:ty)*) => ($(
-        impl Max for $t {
-            #[inline]
-            fn get_max(&self) -> Self {*self::MAX}
-        }
-    )*)
-}
-pub trait Max<T: PartialOrd> {fn get_max(&self) -> Self;}
-// impl Max<T> for T {fn get_max(&self) -> T {T::MAX}}
-// impl Max<u8> for u8 {fn get_max(&self) -> u8 {u8::MAX}}
-impl_max! {
-    bool char usize u8 u16 u32 u64 u128 isize i8 i16 i32 i64 i128 f32 f64
-}
-
-
-// fn bit_sort<T: PartialOrd>(input: &mut Vec<T>, mode: bool) {
-//     if input.len() < 2 {return;}
-    
-//     let mut left: Vec<T> = input.drain(..input.len() / 2).collect();
-//     bit_sort(&mut left, true);
-//     bit_sort(input, false);
-//     left.append(input);
-//     bit_merge(&mut left, mode);
-//     std::mem::swap(input, &mut left);
-// }
-
-// fn bit_merge<T: PartialOrd>(input: &mut Vec<T>, mode) {
-//     if input.len() == 1 {return;}
-//     else {
-//         bit_comp(input, mode);
-//         let mut left: Vec<T> = input.drain(..input.len() / 2).collect();
-//         bit_merge(mode, &mut left);
-//         bit_merge(mode, input);
-//         left.append(input);
-//         std::mem::swap(input, &mut left);
-//     }
-// }
-
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
-    fn test_bitonic() {
+    fn test_bitonic_usize() {
         let mut vector_in = vec![10, 20, 11, 24, 15];
         bitonic_sort(&mut vector_in);
         debug_assert_eq!(vector_in, vec![10, 11, 15, 20, 24]);
+    }
+    #[test]
+    fn test_bitonic_usize_pow_2() {
+        let mut vector_in = vec![10, 20, 11, 24, 15];
+        bitonic_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, vec![10, 11, 15, 20, 24]);
+    }
+    #[test]
+    fn test_bitonic_bool() {
+        let mut vector_in = vec![false, true, false, false, true];
+        bitonic_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, vec![false, false, false, true, true]);
+    }
+    #[test]
+    fn test_bitonic_char() {
+        let mut vector_in = vec!['r', 'u', 's', 't', 'c'];
+        bitonic_sort(&mut vector_in);
+        debug_assert_eq!(vector_in, vec!['c', 'r', 's', 't', 'u']);
     }
     #[test]
     fn test_bitonic_empty() {
@@ -154,12 +137,5 @@ mod tests {
         let mut vector_in = vec![1];
         bitonic_sort(&mut vector_in);
         debug_assert_eq!(vector_in, vec![1]);
-    }
-    #[test]
-    fn test_u8_max() {
-
-        let mut input = 12;
-        input = input.get_max();
-        debug_assert_eq!(input, u8::MAX);
     }
 }

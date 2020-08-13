@@ -4,7 +4,7 @@
 /// This sorting algorithm is in fact a modification of quick sort which should
 /// be faster than quicksort for arrays with less than 7 million elements
 /// This algorithm is generally compared to heapsort and quicksort, it doesn't
-/// need to construct the heap and generally wins in benchmarks because of this
+/// need to construct the heap and generally wins in benchmarks because of this.
 /// 
 /// # Examples
 /// ```rust

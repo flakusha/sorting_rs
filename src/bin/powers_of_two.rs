@@ -1,11 +1,12 @@
-//! Additional private binary to print Leonardo and Fibonnaci numbers.
-//! Leonardo numbers are used in smoothsort algorithm as constant.
+//! Additional private binary to print powers of two.
+//! These numbers are used in bitonic sort algorithm as constant.
 //! This one can be useful in case you need to modify algorithm to use with
 //! 32-, 64-, 128-bit and other systems.
-//! This addition uses usize in case there is mainstream 64-bit system
+//! This addition uses usize in case there is mainstream 64-bit system.
+//! 
 //! # Usage:
 //! ```text
-//! cargo run leonardo_numbers
+//! cargo run --bin powers_of_two
 //! ```
 use std::io;
 

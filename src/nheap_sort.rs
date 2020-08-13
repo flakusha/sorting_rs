@@ -5,7 +5,7 @@
 /// [`PartialOrd`](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html).
 ///
 /// 3 children are a bit more effective than 2, though 4 and more are generally
-/// less effective, but you can modify this parameter
+/// less effective, but you can modify this parameter by editing souces.
 ///
 /// # Examples
 /// ```rust

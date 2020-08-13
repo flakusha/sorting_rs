@@ -9,7 +9,7 @@
 /// It's a relatively simple algorithm developed originally for use
 /// on parallel processors with local interconnections.
 /// 
-/// Batcher algorithm is the enchanced version of odd-even algorithm 
+/// Batcher algorithm is the enchanced version of odd-even algorithm.
 ///
 /// # Examples
 /// ```rust

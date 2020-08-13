@@ -8,7 +8,7 @@
 /// flower pots.
 /// 
 /// Upgraded version of algorithm just remember last sort position, so it
-/// doesn't try to sort already sorted data
+/// doesn't try to sort already sorted data.
 ///
 /// # Examples
 /// ```rust

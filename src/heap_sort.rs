@@ -20,7 +20,7 @@
 /// 
 /// Weak-heap sort main aim is to minimize amount of comparisons between
 /// elements. Amount of comparisons is basically lowered down to nearly
-/// nlogn - n / ln2 + O(logn)
+/// nlogn - n / ln2 + O(logn).
 ///
 /// # Examples
 /// ```rust

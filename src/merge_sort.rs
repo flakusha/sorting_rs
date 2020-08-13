@@ -3,8 +3,6 @@
 /// All kinds of slices can be sorted as long as they implement
 /// [`PartialOrd`](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html).
 /// 
-/// 
-/// 
 /// # Examples
 /// ```rust
 /// let mut slice = vec![3,2,1,4];

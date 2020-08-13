@@ -5,7 +5,7 @@
 /// 
 /// This algorithm aims to minimize number of comparisons, though amount of
 /// data swaps is pretty high, which doesn't make it very effective in practical
-/// use
+/// use.
 /// 
 /// # Examples
 /// ```rust
