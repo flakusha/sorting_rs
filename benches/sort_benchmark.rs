@@ -30,8 +30,14 @@ macro_rules! create_bench {
 }
 
 fn bench(c: &mut Criterion) {
-    let sizes: Vec<usize> = vec![10, 100, 1000, 10_000, 100_000, 1_000_000,
-    /*10_000_000*/];
+    let sizes: Vec<usize> = vec![
+        2, 5, 8, 10, 16, 100, 128, 500, 512, 1000, 1024, 2000, 2048, 8000, 8192,
+        10_000, 16_000, 16_384, 32_000, 32_768, 50_000, /*65_000, 65_536,*/
+        100_000, /* 131_000, 131_072, 262_000, 262_144,*/ 500_000, /*524_288,*/
+        1_000_000, /*1_048_576,*/ 2_000_000, /*2_097_152, 8_388_608,*/
+        10_000_000, /*15_000_000, 16_777_216, 20_000_000,*/ 50_000_000,
+        100_000_000, 250_000_000
+    ];
 
     let benchmark = create_bench! {
         sizes,
@@ -49,6 +55,7 @@ fn bench(c: &mut Criterion) {
         insertion_sort,
         ksort,
         merge_sort,
+        merge_bottom_up_sort,
         nheap_sort,
         oddeven_sort,
         pancake_sort,

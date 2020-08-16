@@ -36,6 +36,7 @@ point too.
 | Bottom-up Heap    | upgraded version of heapsort with decreased number of comparisons    | `nlogn`                                        | `nlogn`                                       | `1`                    |
 | Insertion         | simple, but less effective than quicksort, heapsort or merge sort    | `n`<sup>`2`</sup>; `n`<sup>`2`</sup>           | `n`; `1`                                      | `1`                    |
 | Merge             | independent of data distribution                                     | `nlogn`                                        | `nlogn`                                       | `n`                    |
+| Merge Bottom-up   | independent of data distribution, modified version of mergesort      | `nlogn`                                        | `nlogn`                                       | `n`                    |
 | Odd-even          | presented to be effective on processors with local interconnections  | `n`<sup>`2`</sup>                              | `n`                                           | `1`                    |
 | Odd-even Batcher  | more efficient version of odd-even sort                              | `log`<sup>`2`</sup>`n`                         | `log`<sup>`2`</sup>`n`                        | `logn`<sup>`2`</sup>   |
 | Pancake           | swaps data a lot and not so effective in practice                    | `n`<sup>`3`</sup>; `2n - 3`                    | `n`<sup>`2`</sup>                             | `n`                    |
